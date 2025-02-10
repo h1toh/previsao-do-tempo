@@ -24,13 +24,13 @@ function limparListaDeSugestoes() {
 }
 
 caixaParaDigitarNomeDaCidade.addEventListener('input', () => {
-    clearTimeout(timeout) // Utilizado para limpar o Timeout e q possa recomeçar o delay novamente.
+    clearTimeout(timeout)
 
     let nomeDaCidade = caixaParaDigitarNomeDaCidade.value
 
-    timeout = setTimeout(() => { // Utilizado para dar um delay na sugestão quando o usuario pressionar uma tecla
+    timeout = setTimeout(() => {
         let urlDaAPIBuscarLocalidades = `https://brasilapi.com.br/api/cptec/v1/cidade/${nomeDaCidade}`
-        // Usado para pegar o ID de uma cidade para depois ser utilizado para pegar as informações do tempo dessa cidade
+
         fetch(urlDaAPIBuscarLocalidades)
             .then(response => response.json())
             .then(data => {
