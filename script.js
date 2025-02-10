@@ -11,6 +11,18 @@ let timeout;
 let diasDePrevisao = 6
 let tempoDeResposta = 1000
 
+let mostrarInformacoesDaPrevisaoMeteorologica = (data) => {
+    dataDaAtualiazacao.innerHTML = `Atualizado em ${data.atualizado_em}`
+    localizacao.innerHTML = `${data.estado}, ${data.cidade}`
+    temperaturaMaxima.innerHTML = `Dia ${data.clima[0].max}°C`
+    temperaturaMinima.innerHTML = `Noite ${data.clima[0].min}°C`
+    descricao.innerHTML = data.clima[0].condicao_desc
+}
+
+function limparListaDeSugestoes() {
+    listaDeSugestoes.innerHTML = ''
+}
+
 caixaParaDigitarNomeDaCidade.addEventListener('input', () => {
     clearTimeout(timeout) // Utilizado para limpar o Timeout e q possa recomeçar o delay novamente.
 
@@ -23,25 +35,23 @@ caixaParaDigitarNomeDaCidade.addEventListener('input', () => {
             .then(response => response.json())
             .then(data => {
                 if (data) {
-                    listaDeSugestoes.innerHTML = ''
+                    limparListaDeSugestoes()
+
                     data.forEach(d => {
                         let li = document.createElement('li')
                         li.textContent = d.nome
                         listaDeSugestoes.append(li)
+
                         li.onclick = () => {
                             let idDaCidade = d.id
-                            listaDeSugestoes.innerHTML = ''
+                            caixaParaDigitarNomeDaCidade.value = d.nome
+                            limparListaDeSugestoes()
+
                             let urlDaAPIPrevisaoMeteorologica = `https://brasilapi.com.br/api/cptec/v1/clima/previsao/${idDaCidade}/${diasDePrevisao}`
 
                             fetch(urlDaAPIPrevisaoMeteorologica)
                                 .then(response => response.json())
-                                .then(data => {
-                                    dataDaAtualiazacao.innerHTML = `Atualizado em ${data.atualizado_em}`
-                                    localizacao.innerHTML = `${data.estado}, ${data.cidade}`
-                                    temperaturaMaxima.innerHTML = `Dia ${data.clima[0].max}°C`
-                                    temperaturaMinima.innerHTML = `Noite ${data.clima[0].min}°C`
-                                    descricao.innerHTML = data.clima[0].condicao_desc
-                                })
+                                .then(mostrarInformacoesDaPrevisaoMeteorologica)
                                 .catch(error => console.log('Error', error))
                         }
                     });
@@ -49,5 +59,4 @@ caixaParaDigitarNomeDaCidade.addEventListener('input', () => {
             })
             .catch(error => console.error('Erro:', error))
     }, tempoDeResposta)
-
 })
