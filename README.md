@@ -37,7 +37,3 @@ Este projeto é uma aplicação web que permite ao usuário buscar previsões me
 - Implementar tratamento de erros mais detalhado
 - Melhorar a interface gráfica com CSS
 - Adicionar suporte para previsões meteorológicas mais detalhadas
-
----
-Desenvolvido por [Seu Nome]
-
