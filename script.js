@@ -9,7 +9,7 @@ const temperaturaMinima = document.getElementById('tempmin')
 
 let timeout;
 let diasDePrevisao = 6
-let tempoDeResposta = 1000
+let tempoDeResposta = 500
 
 let mostrarInformacoesDaPrevisaoMeteorologica = (data) => {
     dataDaAtualiazacao.innerHTML = `Atualizado em ${data.atualizado_em}`
@@ -34,28 +34,27 @@ caixaParaDigitarNomeDaCidade.addEventListener('input', () => {
         fetch(urlDaAPIBuscarLocalidades)
             .then(response => response.json())
             .then(data => {
-                if (data) {
-                    limparListaDeSugestoes()
+                limparListaDeSugestoes()
 
-                    data.forEach(d => {
-                        let li = document.createElement('li')
-                        li.textContent = d.nome
-                        listaDeSugestoes.append(li)
+                data.forEach(d => {
+                    let li = document.createElement('li')
+                    li.textContent = d.nome
+                    listaDeSugestoes.append(li)
 
-                        li.onclick = () => {
-                            let idDaCidade = d.id
-                            caixaParaDigitarNomeDaCidade.value = d.nome
-                            limparListaDeSugestoes()
+                    li.onclick = () => {
+                        let idDaCidade = d.id
+                        caixaParaDigitarNomeDaCidade.value = d.nome
+                        limparListaDeSugestoes()
 
-                            let urlDaAPIPrevisaoMeteorologica = `https://brasilapi.com.br/api/cptec/v1/clima/previsao/${idDaCidade}/${diasDePrevisao}`
+                        let urlDaAPIPrevisaoMeteorologica = `https://brasilapi.com.br/api/cptec/v1/clima/previsao/${idDaCidade}/${diasDePrevisao}`
 
-                            fetch(urlDaAPIPrevisaoMeteorologica)
-                                .then(response => response.json())
-                                .then(mostrarInformacoesDaPrevisaoMeteorologica)
-                                .catch(error => console.log('Error', error))
-                        }
-                    });
-                }
+                        fetch(urlDaAPIPrevisaoMeteorologica)
+                            .then(response => response.json())
+                            .then(mostrarInformacoesDaPrevisaoMeteorologica)
+                            .catch(error => console.log('Error', error))
+                    }
+                });
+
             })
             .catch(error => console.error('Erro:', error))
     }, tempoDeResposta)
