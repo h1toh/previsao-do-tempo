@@ -1,0 +1,13 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+.listaDeSugestoes{
+    overflow: scroll;
+}
+
+@media (max-width: 767px) {
+    body {
+        background-color: white;
+    }
+}
