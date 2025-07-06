@@ -1,26 +1,68 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clima e Tempo</title>
+    <title>Clima e Tempo no Brasil</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <h1>Clima e Tempo Brasil</h1>
-    <div>
-        <input type="text" placeholder="Digite o nome da cidade" name="caixaParaDigitarNomeDaCidade" id="caixaParaDigitarNomeDaCidade">
-        <ul class="listaDeSugestoes" id="listaDeSugestoes"></ul>
-    </div>
-    <div>
-        <p id="data"></p>
-        <h2 id="local"></h2>
-        <h2 id="descricao"></h2>
+    <header>
+        <h1 class="titulo">Clima e Tempo Brasil</h1>
         <div>
-            <h2 id="tempmax"></h2>
-            <h2 id="tempmin"></h2>
+            <input type="checkbox" id="menu_checkbox">
+            <label for="menu_checkbox">
+                <div></div>
+                <div></div>
+                <div></div>
+            </label>
         </div>
-    </div>
+    </header>
+    <div class="header2"></div>
+
+    <main>
+        <div class="caixa">
+            <input type="text" placeholder="Digite o nome de uma cidade" name="caixaParaDigitarNomeDaCidade"
+                id="caixaParaDigitarNomeDaCidade" autocomplete="off">
+            <ul class="listaDeSugestoes" id="listaDeSugestoes"></ul>
+        </div>
+
+        <div class="diasDePrevisoes">
+            <div class="previsao" id="previsaoHoje">
+                <h2>Hoje</h2>
+            </div>
+            <div class="previsao" id="previsaoAmanha">
+                <h2>Amanhã</h2>
+            </div>
+            <div class="previsao" id="previsaoProximosDias">
+                <h2>Próximos dias</h2>
+            </div>
+            <div class="previsao" id="previsaoHistorico">
+                <h2>Histórico</h2>
+            </div>
+        </div>
+
+        <div class="informacoes">
+            <p id="data"></p>
+            <h2 id="local"></h2>
+            <h2 id="descricao"></h2>
+            <div class="infoTemp">
+                <h2>Temperatura</h2>
+                <div>
+                    <p id="tempmin"></p>
+                    <p id="tempmax"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>Feito por <a href="https://github.com/h1toh" target="_blank">Lucas Gomes</a></p>
+    </footer>
+
     <script src="script.js"></script>
 </body>
+
 </html>
